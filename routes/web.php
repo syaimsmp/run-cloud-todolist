@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+// changes
 Route::get('/', [App\Http\Controllers\WorkspaceController::class, 'index']);
 
 Route::resource('workspace', WorkspaceController::class);
