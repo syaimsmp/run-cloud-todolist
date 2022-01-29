@@ -19,7 +19,7 @@ class CreateTasksTable extends Migration
             $table->foreignIdFor(Workspace::class);
             $table->string('title', 100)->nullable();
             $table->timestamp('finished_on')->nullable();
-            $table->timestamp('deadline');
+            $table->timestamp('deadline')->nullable();
             $table->timestamps();
         });
     }
