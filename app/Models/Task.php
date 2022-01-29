@@ -20,7 +20,10 @@ class Task extends Model
 
         if(!$this->finished_on){
             $now = Carbon::now();
-            return Carbon::create($this->deadline)->longRelativeDiffForHumans($now);
+            return Carbon::create($deadline)->diffForHumans();
+            // return Carbon::now()->sub($deadline)->calendar();
+            // return Carbon::now()->diffForHumans($deadline);
+            // return Carbon::create($this->deadline)->longRelativeDiffForHumans($now);
         }
         return '-';
 
@@ -29,8 +32,6 @@ class Task extends Model
     public function getSubmissionTimeAttribute()
     {
         if($this->finished_on){
-
-            // return Carbon::parse($this->finished_on)->format('l d-m-Y h:i:s A');
             return Carbon::create($this->finished_on)->longRelativeDiffForHumans($this->deadline);
         }
         return '-';
@@ -41,8 +42,14 @@ class Task extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function workspace(): BelongsTo
+    public function workspace()
     {
         return $this->belongsTo(Workspace::class, 'workspace_id');
+    }
+
+    public function getUserIdAttribute(){
+        if($this->workspace){
+            return $this->workspace->user->id;
+        }
     }
 }

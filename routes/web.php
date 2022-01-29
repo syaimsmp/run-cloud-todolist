@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkspaceController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,7 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', function () {
-    if(Auth::user()){
-        return redirect()->route('workspace.index');
-    }
-
-    return view('auth.login');
-});
+Route::get('/', [App\Http\Controllers\WorkspaceController::class, 'index']);
 
 Route::resource('workspace', WorkspaceController::class);
 Route::resource('task', TaskController::class);

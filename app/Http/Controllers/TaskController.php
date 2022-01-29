@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -26,7 +27,18 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         //
+
         $tasks = Task::where('workspace_id', $request->workspace_id)->get();
+
+        //check if file belongs to user
+        $user = Auth::user();
+        $owner_id = data_get($tasks->first(), 'user_id', $user->id);
+
+        if($owner_id != $user->id){
+            return redirect()->route('workspace.index')->with('error_auth', 'Hanya pemilik dibenarkan melihat paparan tersebut');
+        }
+
+        // dd($tasks->pluck('time_remaining'));
 
         return view('task.index')->with('listing', $tasks);
     }

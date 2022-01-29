@@ -28,8 +28,8 @@ class WorkspaceController extends Controller
     {
         //
         $user = Auth::user();
-        $listing = Workspace::where('user_id', $user->id )->get();
 
+        $listing = Workspace::where('user_id', $user->id )->get();
         return view('home')->with('listing', $listing);
     }
 

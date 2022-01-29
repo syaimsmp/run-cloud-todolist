@@ -17,9 +17,18 @@
                             </ul>
                         </div>
                     @endif
+                    @if (\Session::has('error_auth'))
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li>{!! \Session::get('error_auth') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
+
                     <a title="Add Workspace" href="{{ route('workspace.create') }}" class="btn btn-primary" type="button">
                         <span><i class="fa fa-plus"></i></span>
                     </a>
+
                     <table class="table">
                        <thead>
                            <tr>
