@@ -134,4 +134,17 @@ class TaskController extends Controller
         $task->delete();
         return redirect()->route('task.index', ['workspace_id'=> $request->workspace_id])->with('success', 'Succesfully deleted');
     }
+
+    public function tester( )
+    {
+        //
+        $path = storage_path() . "/result_query.json";
+        $string = json_decode(file_get_contents($path));
+        $string = collect($string)->chunk(3);
+        $string = collect($string)->transform(function ($str){
+             return $str->groupBy('SupplierCode');
+        });
+        return view('test.test2');
+       dd($string);
+    }
 }
