@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+	// new task controller comment
 
     /**
      * Create a new controller instance.
