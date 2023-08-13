@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WorkspaceController extends Controller
 {
+	// workspace controller comment
 
     /**
      * Create a new controller instance.
